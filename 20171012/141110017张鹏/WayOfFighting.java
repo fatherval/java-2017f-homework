@@ -8,17 +8,23 @@ public class WayOfFighting extends space{
    private int columnofleader;
    private int lineofsupporter;
    private int columnofsupporter;
-   public void SetLeader(organism leader,int lol,int col){
+   public void SetLeader(organism leader,int lol,int col)throws MyException{
+       if(lol>this.Getsize()||col>this.Getsize())
+              throw new MyException("Out of bounds");
+
        this.lineofleader=lol;
        this.columnofleader=col;
-       positions[lol*7+col].holder=leader;
+       positions[lol][col].holder=leader;
    }
    public int GetLeader(){
-        return   lineofleader*7+columnofleader;
+        return   lineofleader*7+columnofleader+1;
    }
-   public void SetSupporter(organism supporter,int los,int cos){
+   public void SetSupporter(organism supporter,int los,int cos)throws MyException{
+       if(los>this.Getsize()||cos>this.Getsize())
+              throw new MyException("Out of bounds");
+
        this.lineofsupporter=los;this.columnofsupporter=cos;
-       positions[los*7+cos].holder=supporter;
+       positions[los][cos].holder=supporter;
    }
    public int GetSupporter(){
         return   lineofsupporter*7+columnofsupporter+1;
@@ -35,7 +41,7 @@ public class WayOfFighting extends space{
           organism x;
           for(int i=0;i<7;i++)
             for(int j=0;j<7;j++){
-               x=this.positions[i*7+j].holder;this.positions[i*7+j].holder=this.positions[j*7+i].holder;this.positions[j*7+i].holder=x;
+               x=this.positions[i][j].holder;this.positions[i][j].holder=this.positions[j][i].holder;this.positions[j][i].holder=x;
             }
           }
 }
@@ -48,7 +54,7 @@ public class WayOfFighting extends space{
         this.num=num;
     }
 
-    public void SetSupporter(organism[] supporters){
+    public void SetSupporter(organism[] supporters)throws MyException{
       for(int i=0;i<supporters.length;i++)
          SetSupporter(supporters[i],i,1);
     }
@@ -56,7 +62,7 @@ public class WayOfFighting extends space{
 
 
  class goose extends WayOfFighting{
-     public void SetLeader(organism[] gooses){
+     public void SetLeader(organism[] gooses)throws MyException{
         for(int i=0;i<gooses.length;i++)
            SetLeader(gooses[i],i,i);
      }
@@ -64,7 +70,7 @@ public class WayOfFighting extends space{
 
 
  class moon extends WayOfFighting{
-     public void SetLeader(organism[] moons){
+     public void SetLeader(organism[] moons)throws MyException{
          for(int i=0;i<moons.length;i++){
              if(i%2==0)
                     SetLeader(moons[i],3-i/2,i/2);
@@ -76,7 +82,7 @@ public class WayOfFighting extends space{
 
 
  class crane extends WayOfFighting{
-      public void SetLeader(organism[] cranes){
+      public void SetLeader(organism[] cranes)throws MyException{
          for(int i=0;i<cranes.length;i++){
             if(i<cranes.length/2)
                   SetLeader(cranes[i],i,i);

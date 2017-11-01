@@ -1,6 +1,6 @@
 public class space{
         private int size;
-        public Position[] positions;
+        public Position[][] positions;
 
 
 
@@ -14,26 +14,26 @@ public class space{
            Setsize(size);
            organism  ground=new organism();
            ground.SetName("****");
-           positions=new Position[size*size];
+           positions=new Position[size][size];
            for(int i=0;i<size;i++)
               for(int j=0;j<size;j++){
-                  positions[i*size+j]=new Position();
-                  positions[i*size+j].line=i;
-                  positions[i*size+j].column=j;
-                  positions[i*size+j].holder=ground;
+                  positions[i][j]=new Position();
+                  positions[i][j].line=i;
+                  positions[i][j].column=j;
+                  positions[i][j].holder=ground;
               }
         }
         space(){
            Setsize(7);
            organism  ground=new organism();
            ground.SetName("****");
-           positions=new Position[size*size];
+           positions=new Position[size][size];
            for(int i=0;i<size;i++)
               for(int j=0;j<size;j++){
-                  positions[i*size+j]=new Position();
-                  positions[i*size+j].line=i;
-                  positions[i*size+j].column=j;
-                  positions[i*size+j].holder=ground;
+                  positions[i][j]=new Position();
+                  positions[i][j].line=i;
+                  positions[i][j].column=j;
+                  positions[i][j].holder=ground;
            }
          }
    
@@ -43,16 +43,25 @@ public class space{
           for(int i=0;i<size;i++)
             for(int j=0;j<size;j++){
                  if(j<size-1)
-                     System.out.print(positions[i*size+j].holder.GetName()+" ");
+                     System.out.print(positions[i][j].holder.GetName()+" ");
                  else
-                     System.out.println(positions[i*size+j].holder.GetName());
+                     System.out.println(positions[i][j].holder.GetName());
             }
         }
 //Ö²Èë×Ó¿Õ¼ä
-       public void Addsubspace(space sub,int i,int j){
+       public void Addsubspace(space sub,int i,int j) throws MyException{
+           if(i+sub.Getsize()>this.size||j+sub.Getsize()>this.size)
+              throw new MyException("Out of bounds");
+
+
            for(int m=0;m<sub.Getsize();m++)
               for(int n=0;n<sub.Getsize();n++){
-                   this.positions[i*size+j+n+m*size].holder=sub.positions[m*sub.Getsize()+n].holder;
+                   /*if(sub.positions[m][n].holder!=ground){
+                       if(this.positions[i+m][j+n].holder!=ground)
+                          throw new MyException("Conflicted");
+                       else*/
+                           this.positions[i+m][j+n].holder=sub.positions[m][n].holder;
+                   
               }
        }
 

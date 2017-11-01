@@ -11,15 +11,6 @@ public class fourthweek{
            huluwas[4]=new Huluwa("ÇàÍÞ",COLOR.CYAN,5);
            huluwas[5]=new Huluwa("À¶ÍÞ",COLOR.BLUE,6);
            huluwas[6]=new Huluwa("×ÏÍÞ",COLOR.PURPLE,7);
-           space hulushan=new space(12);
-           snake snakebrothers=new snake();
-           snakebrothers.SetSupporter(huluwas);
-                       
-           supporting grandpa=new supporting();
-           grandpa.SetName("ÀÏºº");
-           snakebrothers.SetLeader(grandpa,3,3);
-           hulushan.Addsubspace(snakebrothers,0,0);
-
            yaoguai [] yaoguais=new yaoguai[7];
            yaoguais[5]=new yaoguai();
            yaoguais[5].SetName("Ð«¾«");
@@ -29,22 +20,40 @@ public class fourthweek{
                 yaoguais[i]=new yaoguai();
                 yaoguais[i].SetName("à¶†ª");
            }
-           goose goosebrothers=new goose();
-           goosebrothers.SetLeader(yaoguais);
-           hulushan.Addsubspace(goosebrothers,0,5);
-
-           hulushan.printout();
-           grandpa.cheerfor();
-           yaoguais[6].cheerfor();
 
 
-           moon moonbrothers=new moon();
-           moonbrothers.SetLeader(yaoguais);
-           hulushan.Addsubspace(moonbrothers,0,5);
+
+           space hulushan=new space(12);
+           try{
+               
+               snake snakebrothers=new snake();
+               snakebrothers.SetSupporter(huluwas);
+                       
+               supporting grandpa=new supporting();
+               grandpa.SetName("ÀÏºº");
+               snakebrothers.SetLeader(grandpa,3,3);
+               hulushan.Addsubspace(snakebrothers,0,0);
 
 
-           hulushan.printout();
-           grandpa.cheerfor();
-           yaoguais[6].cheerfor();
+               goose goosebrothers=new goose();
+               goosebrothers.SetLeader(yaoguais);
+               hulushan.Addsubspace(goosebrothers,0,5);
+
+               hulushan.printout();
+               grandpa.cheerfor();
+               yaoguais[6].cheerfor();
+
+
+               moon moonbrothers=new moon();
+               moonbrothers.SetLeader(yaoguais);
+               hulushan.Addsubspace(moonbrothers,0,5);
+
+
+               hulushan.printout();
+               grandpa.cheerfor();
+               yaoguais[6].cheerfor();
+           }catch(Exception e){
+               e.printStackTrace();
+           }
       }
 }
